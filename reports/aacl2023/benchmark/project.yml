@@ -46,7 +46,7 @@ remotes:
 assets:
   - dest: assets/tlunified_ner.tar.gz
     description: "Contains the annotated TLUnified corpora in spaCy format with PER, ORG, LOC as entity labels (named entity recognition). Annotated by three annotators with IAA (Cohen's Kappa) of 0.78. Corpora was based from *Improving Large-scale Language Models and Resources for Filipino* by Cruz and Cheng (2021)."
-    url: "https://storage.googleapis.com/ljvmiranda/calamanCy/tl_tlunified_gold/v1.0/corpus.tar.gz"
+    url: "reports/aacl2023/benchmark/corpus"
 
 workflows:
   setup:
