@@ -82,7 +82,7 @@ directories:
 assets:
   - dest: assets/corpus.tar.gz
     description: "Annotated TLUnified corpora in spaCy format with train, dev, and test splits."
-    url: "corpus/corpus.tar.gz
+    url: "corpus/corpus.tar.gz"
   - dest: "assets/treebank/UD_Tagalog-Ugnayan/"
     description: "Treebank data for UD_Tagalog-Ugnayan"
     git:
