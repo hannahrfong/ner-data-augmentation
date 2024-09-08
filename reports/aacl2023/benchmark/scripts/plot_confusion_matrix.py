@@ -42,10 +42,6 @@ def plot_confusion_matrix(
                 vector.append(label)
         return vector
 
-    def tokenize_texts(texts: Iterable[str]) -> Iterable[Doc]:
-        """Tokenize a list of texts using the spaCy model"""
-        return list(nlp.pipe(texts))
-
     # Get reference examples
     doc_bin = DocBin().from_disk(reference)
     ref_docs = list(doc_bin.get_docs(nlp.vocab))
@@ -53,7 +49,7 @@ def plot_confusion_matrix(
 
     # Get predicted examples
     texts = [doc.text for doc in ref_docs]  # use the same text
-    pred_docs = tokenize_texts(texts)
+    pred_docs = nlp.pipe(texts)
     predicted_vector = _get_vector(pred_docs)
 
     # Construct the confusion matrix
