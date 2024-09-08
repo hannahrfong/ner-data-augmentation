@@ -53,8 +53,13 @@ def plot_confusion_matrix(
     predicted_vector = _get_vector(pred_docs)
 
     #TODELETE
-    print("PRED")
-    print(pred_docs)
+    pred_docs_list = list(pred_docs)  # Convert generator to list
+    for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs_list)):
+        print(f"Index: {i}")
+        print(f"Reference Document: {ref_doc}")
+        print(f"Predicted Document: {pred_doc}")
+        print()  # Adds a blank line between each iteration for readability
+
     """
     for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs)):
         if ref_doc != pred_doc:
