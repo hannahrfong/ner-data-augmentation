@@ -41,6 +41,7 @@ def plot_confusion_matrix(
                         else token.ent_iob_
                     )
                     vector.append(label)
+        print(vector)
         return vector
 
     # Get reference examples
