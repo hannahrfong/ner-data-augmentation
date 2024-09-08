@@ -34,14 +34,17 @@ def plot_confusion_matrix(
         vector = []
         for doc in docs:
             for token in doc:
-                if (token.text != "'"):
-                    label = (
-                        f"{token.ent_iob_}-{token.ent_type_}"
-                        if token.ent_type_
-                        else token.ent_iob_
-                    )
-                    vector.append(label)
+                label = (
+                    f"{token.ent_iob_}-{token.ent_type_}"
+                    if token.ent_type_
+                    else token.ent_iob_
+                )
+                vector.append(label)
         return vector
+
+    def tokenize_texts(texts: Iterable[str]) -> Iterable[Doc]:
+        """Tokenize a list of texts using the spaCy model"""
+        return list(nlp.pipe(texts))
 
     # Get reference examples
     doc_bin = DocBin().from_disk(reference)
@@ -50,7 +53,7 @@ def plot_confusion_matrix(
 
     # Get predicted examples
     texts = [doc.text for doc in ref_docs]  # use the same text
-    pred_docs = nlp.pipe(texts)
+    pred_docs = tokenize_texts(texts)
     predicted_vector = _get_vector(pred_docs)
 
     # Construct the confusion matrix
