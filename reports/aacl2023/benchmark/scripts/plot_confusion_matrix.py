@@ -42,6 +42,7 @@ def plot_confusion_matrix(
                 )
                 vector.append(label)
             print(doc)
+            print()
         return vector
 
     # Get reference examples
