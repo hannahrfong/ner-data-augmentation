@@ -56,12 +56,10 @@ def plot_confusion_matrix(
         # Print differences
 
     for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs)):
-        ref_labels = _get_vector([ref_doc])
-        pred_labels = _get_vector([pred_doc])
-        if ref_labels != pred_labels:
+        if ref_doc != pred_doc:
             print(f"Document {i} differs:")
-            print(f"Reference: {' '.join(ref_labels)}")
-            print(f"Predicted: {' '.join(pred_labels)}")
+            print(f"Reference: {' '.join(ref_doc)}")
+            print(f"Predicted: {' '.join(pred_doc)}")
             print()
 
     # Construct the confusion matrix
