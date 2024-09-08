@@ -55,10 +55,9 @@ def plot_confusion_matrix(
     #TODELETE
     
     for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs)):
-        print(f"Document {i} differs:")
-        print(f"Reference: {' '.join(ref_doc)}")
-        print(f"Predicted: {' '.join(pred_doc)}")
-        print()
+        print(i)
+        print(ref_doc)
+        print(pred_doc)
         """
         if ref_doc != pred_doc:
             print(f"Document {i} differs:")
