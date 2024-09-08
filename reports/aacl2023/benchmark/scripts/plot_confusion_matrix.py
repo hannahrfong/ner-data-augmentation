@@ -34,14 +34,16 @@ def plot_confusion_matrix(
         vector = []
         print("DIFFERENT VECTOR $$$$$$$")
         for doc in docs:
-            for token in doc:
+            doc2 = []
+            for token in doc:   
                 label = (
                     f"{token.ent_iob_}-{token.ent_type_}"
                     if token.ent_type_
                     else token.ent_iob_
                 )
                 vector.append(label)
-            print(label)
+                doc2.append(label)
+            print(doc2)
             print()
         return vector
 
