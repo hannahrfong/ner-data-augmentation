@@ -52,6 +52,15 @@ def plot_confusion_matrix(
     pred_docs = nlp.pipe(texts)
     predicted_vector = _get_vector(pred_docs)
 
+    #TO DELETE
+    def compare_vectors(reference_vector, predicted_vector):
+        for i, (ref, pred) in enumerate(zip(reference_vector, predicted_vector)):
+            if ref != pred:
+                print(f"Index {i}: Reference '{ref}' != Prediction '{pred}'")
+
+    # Add this function call after computing the vectors
+    compare_vectors(reference_vector, predicted_vector)
+
     # Construct the confusion matrix
     labels = ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "O"]
     matrix = confusion_matrix(
