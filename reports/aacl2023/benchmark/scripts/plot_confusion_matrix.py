@@ -40,7 +40,7 @@ def plot_confusion_matrix(
                     if token.ent_type_
                     else token.ent_iob_
                 )
-                print(token.text + ": " + label)
+                print(token.text)
                 vector.append(label)
             print()
         return vector
