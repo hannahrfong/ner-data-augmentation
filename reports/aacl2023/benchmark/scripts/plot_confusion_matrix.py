@@ -32,20 +32,15 @@ def plot_confusion_matrix(
     def _get_vector(docs: Iterable[Doc]) -> Iterable[str]:
         """Get label vector from a set of documents"""
         vector = []
-        print("DIFFERENT VECTOR $$$$$$$")
         for doc in docs:
-            doc2 = []
             for token in doc:   
-                label = (
-                    f"{token.ent_iob_}-{token.ent_type_}"
-                    if token.ent_type_
-                    else token.ent_iob_
-                )
+                if (token != "\'"):
+                    label = (
+                        f"{token.ent_iob_}-{token.ent_type_}"
+                        if token.ent_type_
+                        else token.ent_iob_
+                    )
                 vector.append(label)
-                doc2.append(label)
-                print(token)
-                print(label)
-            print()
         return vector
 
     # Get reference examples
@@ -57,18 +52,7 @@ def plot_confusion_matrix(
     texts = [doc.text for doc in ref_docs]  # use the same text
     pred_docs = nlp.pipe(texts)
     predicted_vector = _get_vector(pred_docs)
-
-    #TODELETE
-    """
-    for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs)):
-        if ref_doc != pred_doc:
-            print(f"Document {i} differs:")
-            print(f"Reference: {' '.join(ref_doc)}")
-            print(f"Predicted: {' '.join(pred_doc)}")
-            print()
-    """
    
-    """
     # Construct the confusion matrix
     labels = ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "O"]
     matrix = confusion_matrix(
@@ -108,7 +92,7 @@ def plot_confusion_matrix(
 
     fig.tight_layout()
     plt.savefig(outfile, transparent=True)
-    """
+
 
 if __name__ == "__main__":
     typer.run(plot_confusion_matrix)
