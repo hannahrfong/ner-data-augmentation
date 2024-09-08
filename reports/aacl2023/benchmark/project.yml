@@ -64,7 +64,7 @@ commands:
     help: "Install models in the spaCy workspace"
     script:
       - pip install https://huggingface.co/ljvmiranda921/tl_calamancy_lg/resolve/main/tl_calamancy_lg-0.1.0-py3-none-any.whl
-      - pip install https://huggingface.co/ljvmiranda921/tl_calamancy_trf/resolve/main/tl_calamancy_trf-any-py3-none-any.whl
+      - pip install https://huggingface.co/ljvmiranda921/tl_calamancy_trf/resolve/main/tl_calamancy_trf-0.1.0-py3-none-any.whl
 
   - name: "process-datasets"
     help: "Process the datasets and convert them into spaCy format"
