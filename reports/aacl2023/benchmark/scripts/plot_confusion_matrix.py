@@ -32,6 +32,7 @@ def plot_confusion_matrix(
     def _get_vector(docs: Iterable[Doc]) -> Iterable[str]:
         """Get label vector from a set of documents"""
         vector = []
+        print("DIFFERENT VECTOR $$$$$$$")
         for doc in docs:
             for token in doc:
                 label = (
@@ -40,6 +41,7 @@ def plot_confusion_matrix(
                     else token.ent_iob_
                 )
                 vector.append(label)
+            print(doc)
         return vector
 
     # Get reference examples
@@ -53,11 +55,6 @@ def plot_confusion_matrix(
     predicted_vector = _get_vector(pred_docs)
 
     #TODELETE
-    for doc in pred_docs:
-        print(doc)
-    
-    pred_docs_list = list(pred_docs)
-    print(pred_docs_list)
     """
     for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs)):
         if ref_doc != pred_doc:
