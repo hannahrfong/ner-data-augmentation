@@ -54,9 +54,7 @@ def plot_confusion_matrix(
 
     #TODELETE
         # Print differences
-    if len(reference_vector) != len(predicted_vector):
-        msg.warn("Mismatch in length between reference and predicted vectors")
-    
+
     for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs)):
         ref_labels = _get_vector([ref_doc])
         pred_labels = _get_vector([pred_doc])
