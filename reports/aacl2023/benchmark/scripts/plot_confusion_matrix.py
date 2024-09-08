@@ -33,13 +33,12 @@ def plot_confusion_matrix(
         """Get label vector from a set of documents"""
         vector = []
         for doc in docs:
-            for token in doc:   
-                if (token != "\'"):
-                    label = (
-                        f"{token.ent_iob_}-{token.ent_type_}"
-                        if token.ent_type_
-                        else token.ent_iob_
-                    )
+            for token in doc:
+                label = (
+                    f"{token.ent_iob_}-{token.ent_type_}"
+                    if token.ent_type_
+                    else token.ent_iob_
+                )
                 vector.append(label)
         return vector
 
@@ -52,7 +51,7 @@ def plot_confusion_matrix(
     texts = [doc.text for doc in ref_docs]  # use the same text
     pred_docs = nlp.pipe(texts)
     predicted_vector = _get_vector(pred_docs)
-   
+
     # Construct the confusion matrix
     labels = ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "O"]
     matrix = confusion_matrix(
