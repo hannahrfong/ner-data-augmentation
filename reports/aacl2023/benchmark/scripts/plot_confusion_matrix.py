@@ -29,10 +29,25 @@ def plot_confusion_matrix(
         spacy.prefer_gpu(gpu_id=gpu_id)
     nlp = spacy.load(model_path)
 
+    def _get_vector(docs: Iterable[Doc]) -> Iterable[Iterable[str]]:
+        """Get label vector from a set of documents, with each document's labels grouped together."""
+        vectors = []  # List of lists, one for each document
+        for doc in docs:
+            doc_vector = []  # Store labels for the current document
+            for token in doc:
+                label = (
+                    f"{token.ent_iob_}-{token.ent_type_}"
+                    if token.ent_type_
+                    else token.ent_iob_
+                )
+                doc_vector.append(label)
+            vectors.append(doc_vector)  # Append the current document's vector to the overall list
+        return vectors
+
+    """
     def _get_vector(docs: Iterable[Doc]) -> Iterable[str]:
-        """Get label vector from a set of documents"""
+        #Get label vector from a set of documents
         vector = []
-        print("DIFFERENT VECTOR $$$$$$$")
         for doc in docs:
             for token in doc:
                 label = (
@@ -41,19 +56,34 @@ def plot_confusion_matrix(
                     else token.ent_iob_
                 )
                 vector.append(label)
-            print(vector)
-            print()
-        return vector
+        return vector    
+    """
+
 
     # Get reference examples
     doc_bin = DocBin().from_disk(reference)
     ref_docs = list(doc_bin.get_docs(nlp.vocab))
-    reference_vector = _get_vector(ref_docs)
+    ref_vectors = _get_vector(ref_docs)
 
     # Get predicted examples
     texts = [doc.text for doc in ref_docs]  # use the same text
     pred_docs = nlp.pipe(texts)
-    predicted_vector = _get_vector(pred_docs)
+    pred_vectors = _get_vector(pred_docs)
+
+    def check_vector_lengths(ref_vectors: Iterable[Iterable[str]], pred_vectors: Iterable[Iterable[str]]) -> None:
+        """Check if the length of each document's vector is equal between reference and predicted."""
+        for i, (ref_vector, pred_vector) in enumerate(zip(ref_vectors, pred_vectors)):
+            if len(ref_vector) != len(pred_vector):
+                print(f"Document {i} has a length mismatch: Reference {len(ref_vector)} vs Predicted {len(pred_vector)}")
+            else:
+                print(f"Document {i} length matches: {len(ref_vector)}")
+
+    # Example usage
+    ref_vectors = _get_vector(ref_docs)
+    pred_vectors = _get_vector(pred_docs)
+
+    check_vector_lengths(ref_vectors, pred_vectors)
+
 
     #TODELETE
     """
