@@ -100,38 +100,38 @@ commands:
     deps:
       - training/baseline/model-best/
 
-- name: "baseline"
-  help: "Train a transition-based parser without any embeddings or static vectors"
-  script:
-    - mkdir -p training/baseline-${vars.train_dev}/
-    - >-
-      python -m spacy train
-      configs/default.cfg
-      --nlp.lang ${vars.lang}
-      --output training/baseline-${vars.train_dev}/
-      --paths.train corpus/${vars.train_dev}/train.spacy
-      --paths.dev corpus/${vars.train_dev}/dev.spacy
-      --gpu-id ${vars.gpu_id}
-    - >-
-      python -m spacy evaluate
-      training/baseline-${vars.train_dev}/model-best/
-      corpus/${vars.test}/test.spacy
-      --output metrics/baseline-${vars.train_dev}.json
-      --gpu-id ${vars.gpu_id}
-    - >-
-      python plot_confusion_matrix.py
-      corpus/${vars.test}/test.spacy
-      training/baseline-${vars.train_dev}/model-best/
-      plots/confusion_matrix_${vars.train_dev}.png
-      --gpu-id ${vars.gpu_id}
-  deps:
-    - corpus/${vars.train_dev}/train.spacy
-    - corpus/${vars.train_dev}/dev.spacy
-    - corpus/${vars.test}/test.spacy
-  outputs:
-    - training/baseline-${vars.train_dev}/model-best/
-    - metrics/baseline-${vars.train_dev}.json
-    - plots/confusion_matrix_${vars.train_dev}.png
+  - name: "baseline"
+    help: "Train a transition-based parser without any embeddings or static vectors"
+    script:
+      - mkdir -p training/baseline-${vars.train_dev}/
+      - >-
+        python -m spacy train
+        configs/default.cfg
+        --nlp.lang ${vars.lang}
+        --output training/baseline-${vars.train_dev}/
+        --paths.train corpus/${vars.train_dev}/train.spacy
+        --paths.dev corpus/${vars.train_dev}/dev.spacy
+        --gpu-id ${vars.gpu_id}
+      - >-
+        python -m spacy evaluate
+        training/baseline-${vars.train_dev}/model-best/
+        corpus/${vars.test}/test.spacy
+        --output metrics/baseline-${vars.train_dev}.json
+        --gpu-id ${vars.gpu_id}
+      - >-
+        python plot_confusion_matrix.py
+        corpus/${vars.test}/test.spacy
+        training/baseline-${vars.train_dev}/model-best/
+        plots/confusion_matrix_${vars.train_dev}.png
+        --gpu-id ${vars.gpu_id}
+    deps:
+      - corpus/${vars.train_dev}/train.spacy
+      - corpus/${vars.train_dev}/dev.spacy
+      - corpus/${vars.test}/test.spacy
+    outputs:
+      - training/baseline-${vars.train_dev}/model-best/
+      - metrics/baseline-${vars.train_dev}.json
+      - plots/confusion_matrix_${vars.train_dev}.png
 
   - name: "static-vectors"
     help: "Use the trained calamanCy pipeline to evaluate the dev and test set"
