@@ -53,19 +53,20 @@ def plot_confusion_matrix(
     predicted_vector = _get_vector(pred_docs)
 
     #TODELETE
-    print("REF DOCS")
-    print(ref_docs)
-    print()
-    print("PRED DOCS")
-    print(pred_docs)
-    """
+    
     for i, (ref_doc, pred_doc) in enumerate(zip(ref_docs, pred_docs)):
+        print(f"Document {i} differs:")
+        print(f"Reference: {' '.join(ref_doc)}")
+        print(f"Predicted: {' '.join(pred_doc)}")
+        print()
+        """
         if ref_doc != pred_doc:
             print(f"Document {i} differs:")
             print(f"Reference: {' '.join(ref_doc)}")
             print(f"Predicted: {' '.join(pred_doc)}")
             print()
-    """
+        """
+   
     """
     # Construct the confusion matrix
     labels = ["B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "O"]
