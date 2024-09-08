@@ -95,7 +95,6 @@ commands:
   - name: "plot"
     help: "Create plots for the report"
     script:
-      - python -m scripts.plot_iaa ../figures/iaa.pdf
       - python -m scripts.plot_confusion_matrix corpus/dev.spacy training/baseline/model-best/ ../figures/confusion.pdf --gpu-id ${vars.gpu_id} --normalize
     deps:
       - training/baseline/model-best/
