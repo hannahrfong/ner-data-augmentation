@@ -32,6 +32,7 @@ def plot_confusion_matrix(
     def _get_vector(docs: Iterable[Doc]) -> Iterable[str]:
         """Get label vector from a set of documents"""
         vector = []
+        print("* NEW VECTOR *")
         for doc in docs:
             for token in doc:
                 label = (
@@ -39,6 +40,7 @@ def plot_confusion_matrix(
                     if token.ent_type_
                     else token.ent_iob_
                 )
+                print(token.text + " - " + label)
                 vector.append(label)
         return vector
 
