@@ -34,6 +34,7 @@ def plot_confusion_matrix(
         vector = []
         for doc in docs:
             for token in doc:
+                print(token)
                 if (token != "\'"):
                     label = (
                         f"{token.ent_iob_}-{token.ent_type_}"
